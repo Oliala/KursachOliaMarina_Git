@@ -9,7 +9,7 @@ namespace KursachOliaMarina.Models
     {
         public int Id { get; set; }
         public string DishName { get; set; }
-        public string Category { get; set; } // первое\второе\десерт\напиток
+        public int Category { get; set; } // первое\второе\десерт\напиток
         // можно сделать категорию тоже цифрой, тогда легко будет отсортировать
         // 1 = первое, 2 = второе, 3 = салат, 4 = десерт, 5 = напиток
         // в таком порядке они и будут идти потом в меню, а не вперемешку
