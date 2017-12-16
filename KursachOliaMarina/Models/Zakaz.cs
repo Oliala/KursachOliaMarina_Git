@@ -14,7 +14,7 @@ namespace KursachOliaMarina.Models
 
         // не знаю что еще, надо подумать
 
-        public int? ProfileId { get; set; }
-        public UserProfile Profile { get; set; }
+        public int? UserId { get; set; }
+        public User User { get; set; }
     }
 }

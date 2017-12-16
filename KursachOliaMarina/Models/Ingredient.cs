@@ -9,7 +9,6 @@ namespace KursachOliaMarina.Models
     {
         public int Id { get; set; }
         public string IngredientName { get; set; }
-        // не знаю что еще сюда добавить
 
         public virtual ICollection<Dish> Dishes { get; set; }
         public Ingredient()

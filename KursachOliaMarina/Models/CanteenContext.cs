@@ -8,14 +8,9 @@ namespace KursachOliaMarina.Models
     public class CanteenContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Zakaz> Zakazs { get; set; }
-
-            public DbSet<Dish> Dishes { get; set; }
-            public DbSet<Ingredient> Ingredients { get; set; }
-
-            public CanteenContext() : base("DefaultConnection")
-            { }
+        public DbSet<Dish> Dishes { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
 
             protected override void OnModelCreating(DbModelBuilder modelBuilder)
             {
