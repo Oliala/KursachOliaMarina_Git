@@ -46,7 +46,7 @@ namespace KursachOliaMarina.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,Password,Role,LName,FName,Sex,Visit")] User user)
+        public ActionResult Create([Bind(Include = "Id,Email,Password,Roles,LName,FName,Sex,Visit")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace KursachOliaMarina.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,Password,Role,LName,FName,Sex,Visit")] User user)
+        public ActionResult Edit([Bind(Include = "Id,Email,Password,Roles,LName,FName,Sex,Visit")] User user)
         {
             if (ModelState.IsValid)
             {
