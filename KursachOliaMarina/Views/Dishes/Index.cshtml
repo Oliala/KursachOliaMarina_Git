@@ -12,7 +12,15 @@
         <th>
             @Html.DisplayNameFor(model => model.DishName)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -20,6 +28,15 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DishName)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
