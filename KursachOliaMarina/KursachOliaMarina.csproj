@@ -214,6 +214,16 @@
     <Content Include="Views\Ingredients\Details.cshtml" />
     <Content Include="Views\Ingredients\Edit.cshtml" />
     <Content Include="Views\Ingredients\Index.cshtml" />
+    <Content Include="Views\Dishs\Index.cshtml" />
+    <Content Include="Views\Dishs\Create.cshtml" />
+    <Content Include="Views\Dishs\Delete.cshtml" />
+    <Content Include="Views\Dishs\Details.cshtml" />
+    <Content Include="Views\Dishs\Edit.cshtml" />
+    <Content Include="Views\Zakazs\Index.cshtml" />
+    <Content Include="Views\Zakazs\Create.cshtml" />
+    <Content Include="Views\Zakazs\Delete.cshtml" />
+    <Content Include="Views\Zakazs\Edit.cshtml" />
+    <Content Include="Views\Zakazs\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Registration\" />
