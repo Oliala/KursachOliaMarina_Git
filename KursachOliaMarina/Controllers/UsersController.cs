@@ -58,6 +58,29 @@ namespace KursachOliaMarina.Controllers
             return View(user);
         }
 
+        // GET: Users/Register
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        // POST: Users/Register
+        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
+        // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include = "Id,Email,Password,Roles,LName,FName,Sex,Visit")] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(user);
+        }
+
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {

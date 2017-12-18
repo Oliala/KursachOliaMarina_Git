@@ -214,6 +214,8 @@
     <Content Include="Views\Ingredients\Details.cshtml" />
     <Content Include="Views\Ingredients\Edit.cshtml" />
     <Content Include="Views\Ingredients\Index.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Users\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Registration\" />
