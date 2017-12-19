@@ -11,6 +11,8 @@ namespace KursachOliaMarina.Models
         public DbSet<Zakaz> Zakazs { get; set; }
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public CanteenContext(): base("CanteenContext") { }
 
             protected override void OnModelCreating(DbModelBuilder modelBuilder)
             {
