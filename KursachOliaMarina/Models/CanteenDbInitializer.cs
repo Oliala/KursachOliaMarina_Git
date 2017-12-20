@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KursachOliaMarina.Models
 {
-    public class CanteenDbInitializer:DropCreateDatabaseAlways<CanteenContext>
+    public class CanteenDbInitializer:DropCreateDatabaseIfModelChanges<CanteenContext>
     {
         protected override void Seed(CanteenContext context)
         {
@@ -14,14 +14,28 @@ namespace KursachOliaMarina.Models
             { Id = 1,
                 FName = "fdgg",
                 LName = "fdf",
-                Email = "asas",
+                Email = "user1",
                 Sex = "man",
-                Password = "asd",
-                Visit = 1,
-                Roles = "ad",
+                Password = "user1",
+                Visit = 1
+                
 
             };
             context.Users.Add(user);
+            Admin adm1 = new Admin
+            {
+                Id = 1,
+                Login = "admin1",
+                Password = "admin1"
+            };
+            Admin adm2 = new Admin
+            {
+                Id = 1,
+                Login = "admin2",
+                Password = "admin2"
+            };
+            context.Admins.Add(adm1);
+            context.Admins.Add(adm2);
             base.Seed(context);
         }
     }

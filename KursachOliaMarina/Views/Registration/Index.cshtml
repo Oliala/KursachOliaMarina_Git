@@ -1,17 +1,20 @@
-@model KursachOliaMarina.Models.User
+﻿@model KursachOliaMarina.Models.User
 
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
 }
 
-<h2>Create</h2>
+<h2>Index</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Register", "Registration", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
+        @if (@ViewBag.RegisterFaultMessage != null)
+        {
+            <h2>@ViewBag.RegisterFaultMessage</h2>
+        }
         <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -28,14 +31,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Roles, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Roles, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Roles, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -82,3 +77,5 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
