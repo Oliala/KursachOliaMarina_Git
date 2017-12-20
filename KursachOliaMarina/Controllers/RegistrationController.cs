@@ -17,7 +17,7 @@ namespace KursachOliaMarina.Controllers
         // GET: Registration
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View();
         }
         public ActionResult Back()
         {
