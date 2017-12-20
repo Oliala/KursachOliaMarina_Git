@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using KursachOliaMarina.Models;
 
 namespace KursachOliaMarina.Controllers
 {
     public class HomeController : Controller
     {
+        CanteenContext db = new CanteenContext();
         public ActionResult Index()
         {
+            db.SaveChanges();
             return View();
         }
 

@@ -186,15 +186,17 @@
     <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredientsController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\ZakazsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\CanteenContext.cs" />
+    <Compile Include="Models\CanteenDbInitializer.cs" />
     <Compile Include="Models\Dish.cs" />
     <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserContext.cs" />
     <Compile Include="Models\Zakaz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
