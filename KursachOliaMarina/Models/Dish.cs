@@ -16,9 +16,7 @@ namespace KursachOliaMarina.Models
         public decimal Price { get; set; }
         public decimal Weight { get; set; }
         public int Popularity { get; set; }
-        public int Weekday { get; set; }
         public string Note { get; set; } // Рыбное\мясное\сладкое\молочное
-
 
         public virtual ICollection<Ingredient> Ingredients { get; set; }
         public Dish()
