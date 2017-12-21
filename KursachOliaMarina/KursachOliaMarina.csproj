@@ -235,11 +235,12 @@
     <Content Include="Views\Zakazs\Delete.cshtml" />
     <Content Include="Views\Zakazs\Edit.cshtml" />
     <Content Include="Views\Zakazs\Details.cshtml" />
-    <Content Include="Views\Admins\Index.cshtml" />
     <Content Include="Views\Admins\Login.cshtml" />
     <Content Include="Views\Users\IndexUser.cshtml" />
     <Content Include="Views\Users\LoginUser.cshtml" />
     <Content Include="Views\Registration\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admins\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
