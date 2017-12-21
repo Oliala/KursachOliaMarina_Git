@@ -51,9 +51,10 @@ namespace KursachOliaMarina.Controllers
             ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
             //int hc = db.Hairdressers.Count();
             //ViewBag.HairdressersCount = hc;
-            ViewBag.UsersCount = db.Users.Count();
-            ViewBag.IngredientsCount = db.Ingredients.Count();
-            ViewBag.DishesCount = db.Dishes.Count();
+            GetDataForAdmin();
+            //ViewBag.UsersCount = db.Users.Count();
+            //ViewBag.IngredientsCount = db.Ingredients.Count();
+            //ViewBag.DishesCount = db.Dishes.Count();
             return View();
         }
         public ActionResult Users()
@@ -87,44 +88,24 @@ namespace KursachOliaMarina.Controllers
             return View(db);
         }
 
-        public void GetDataForUser()
+        public void GetDataForAdmin()
         {
-            Admin admin = (Admin)Session["admin"];
-            //IEnumerable<HairStyle> hairStyles = db.HairStyles.Where(z => z.Sex.Equals(client.Sex));
-            //ViewBag.HairStyles = hairStyles;
-            //IEnumerable<Service> services = db.Services.Where(z => z.Sex.Equals(client.Sex) || z.Sex.Equals("a"));
-            //ViewBag.Services = services;
-            //ViewBag.Login = client.Login;
-            //IEnumerable<Hairdresser> hairDressers = db.Hairdressers;
-            //ViewBag.HairDressers = hairDressers;
-            //ViewBag.IdClient = client.Id;
-            //IList<Zakaz> zakazs = db.Zakazs.Where(f => f.UserId.Equals(user.Id)).ToList();
-            //IList<HairStyle> orderedHairstyles = new List<HairStyle>();
-            //IList<Hairdresser> orderedHairdressers = new List<Hairdresser>();
-            //IList<List<Service>> orderedServices = new List<List<Service>>();
-            //List<double> orderCosts = new List<double>();
-            //foreach (Zakaz zakaz in zakazs)
-            {
-                //    //get hairstyle of current order
-                //    orderedHairstyles.Add(db.HairStyles.Where(s =>
-                //        s.Id == order.HairStyleId).ToList().First());
-                //    //hairdresser
-                //    orderedHairdressers.Add(db.Hairdressers.Where(d =>
-                //        d.Id == order.HairdresserId).ToList().First());
-                //    //list of services
-                //    orderedServices.Add(order.Services.ToList());
-                //    double cost = db.HairStyles.Where(s => s.Id == order.HairStyleId).ToList().First().Cost;
-                //    foreach (Service service in order.Services.ToList())
-                //    {
-                //        cost += service.Cost;
-                //    }
-                //    orderCosts.Add(cost);
-            }
-            //ViewBag.OrderedHairstyles = orderedHairstyles;
-            //ViewBag.OrderedHairdressers = orderedHairdressers;
-            //ViewBag.Orders = orders;
-            //ViewBag.OrderedServices = orderedServices;
-            //ViewBag.CostOfOrders = orderCosts;
+            //Admin admin = (Admin)Session["admin"];
+            //IEnumerable<Dish> dishes = db.Dishes;
+            //ViewBag.Dishes = dishes;
+            
+            //IList<Menu> menus = db.Menus;
+            //IList<List<Dish>> readyDishes = new List<List<Dish>>();
+            
+            //foreach (Menu menu in menus)
+            //{
+                
+            //     readyDishes.Add(menu.Dishes.ToList());
+                
+            //}
+            
+            //ViewBag.ReadyDishes = readyDishes;
+            
         }
 
         public ActionResult CreateIngredient([Bind(Include = "Id,IngredientName")] Ingredient ingredient)

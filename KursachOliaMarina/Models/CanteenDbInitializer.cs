@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KursachOliaMarina.Models
 {
-    public class CanteenDbInitializer:DropCreateDatabaseIfModelChanges<CanteenContext>
+    public class CanteenDbInitializer:DropCreateDatabaseAlways<CanteenContext>
     {
         protected override void Seed(CanteenContext context)
         {
