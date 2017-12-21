@@ -19,9 +19,14 @@ namespace KursachOliaMarina.Models
         public string Note { get; set; } // Рыбное\мясное\сладкое\молочное
 
         public virtual ICollection<Ingredient> Ingredients { get; set; }
+        public virtual ICollection<Menu> Menus { get; set; }
+
         public Dish()
         {
             Ingredients = new List<Ingredient>();
+            Menus = new List<Menu>();
         }
+        
+
     }
 }

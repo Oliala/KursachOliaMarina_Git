@@ -9,6 +9,8 @@ namespace KursachOliaMarina.Models
     {
         public int Id { get; set; }
 
+        public DateTime Date { get; set; }
+
         public virtual ICollection<Dish> Dishes { get; set; }
         public Menu() {
             Dishes = new List<Dish>();
