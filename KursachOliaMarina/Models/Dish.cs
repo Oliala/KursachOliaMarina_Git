@@ -32,7 +32,5 @@ namespace KursachOliaMarina.Models
 
     }
 
-    public class Menu
-    {
-    }
+    
 }
