@@ -21,11 +21,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Продукты", "Index", "Ingredients")</li>
-                    <li>@Html.ActionLink("Блюда", "Index", "Dishes")</li>
-                    <li>@Html.ActionLink("Заказы", "Index", "Zakazs")</li>
-                    <li>@Html.ActionLink("Юзеры", "Index", "Users")</li>
-                    <li>@Html.ActionLink("ЛогинАдмин", "Login", "Admins")</li>
+                    <li>@Html.ActionLink("Топ 10 блюд", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Топ 10 клиентов", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Меню", "Index", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                 <li>@Html.ActionLink("ЛогинАдмин", "Login", "Admins")</li>
                     <li>@Html.ActionLink("ЛогинUser", "LoginUser", "Users")</li>
                     <li>@Html.ActionLink("RegistUser", "Index", "Registration")</li>
                 </ul>

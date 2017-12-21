@@ -1,3 +1,4 @@
+@model KursachOliaMarina.Models.CanteenContext
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -10,20 +11,20 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DishName)
+            @Html.DisplayNameFor(model => model.Dishes.First().DishName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Weight)
+            @Html.DisplayNameFor(model => model.Dishes.First().Weight)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Dishes.First().Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Note)
+            @Html.DisplayNameFor(model => model.Dishes.First().Note)
         </th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Dishes)
     {
         <tr>
             <td>
@@ -40,7 +41,6 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
