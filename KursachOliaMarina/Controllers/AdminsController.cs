@@ -55,6 +55,7 @@ namespace KursachOliaMarina.Controllers
             //ViewBag.UsersCount = db.Users.Count();
             //ViewBag.IngredientsCount = db.Ingredients.Count();
             //ViewBag.DishesCount = db.Dishes.Count();
+            //ViewBag.DishesCount = db.Dishes.Count();
             return View();
         }
         public ActionResult Users()
@@ -88,23 +89,46 @@ namespace KursachOliaMarina.Controllers
             return View(db);
         }
 
+        public ActionResult CreateMenu()
+        {
+            if (Session["admin"] == null)
+            {
+                ViewBag.LoginFaultMessage = "Ошибка доступа. Авторизируйтесь";
+                return RedirectToAction("Login");
+            }
+            ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
+            GetDataForAdmin();
+            return View();
+        }
+        public ActionResult Menus()
+        {
+            if (Session["admin"] == null)
+            {
+                ViewBag.LoginFaultMessage = "Ошибка доступа. Авторизируйтесь";
+                return RedirectToAction("Login");
+            }
+            ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
+            
+            return View();
+        }
+
         public void GetDataForAdmin()
         {
-            //Admin admin = (Admin)Session["admin"];
-            //IEnumerable<Dish> dishes = db.Dishes;
-            //ViewBag.Dishes = dishes;
-            
-            //IList<Menu> menus = db.Menus;
-            //IList<List<Dish>> readyDishes = new List<List<Dish>>();
-            
-            //foreach (Menu menu in menus)
-            //{
-                
-            //     readyDishes.Add(menu.Dishes.ToList());
-                
-            //}
-            
-            //ViewBag.ReadyDishes = readyDishes;
+            Admin admin = (Admin)Session["admin"];
+            IEnumerable<Dish> dishes = db.Dishes;
+            ViewBag.Dishes = dishes;
+
+            IList<Menu> menus = db.Menus.Where(f => f.Id.Equals(admin.Id)).ToList();
+            IList<List<Dish>> selectedDishes = new List<List<Dish>>();
+
+            foreach (Menu menu in menus)
+            {
+
+                selectedDishes.Add(menu.Dishes.ToList());
+
+            }
+
+            ViewBag.ReadyDishes = selectedDishes;
         }
 
         public ActionResult CreateIngredient([Bind(Include = "Id,IngredientName")] Ingredient ingredient)
@@ -115,6 +139,40 @@ namespace KursachOliaMarina.Controllers
                 db.SaveChanges();
             }
             return RedirectToAction("Ingredients");
+        }
+
+        public ActionResult CreateAdditionMenu([Bind(Include = "Id,dateOfMenu")] Menu menu)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Menus.Add(menu);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Menus");
+        }
+        public ActionResult CreateDish([Bind(Include = "Id,DishName,Category,Price,Weight,Note")] Dish dish)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Dishes.Add(dish);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Create","Dishes");
+        }
+        public ActionResult DeleteDish(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Dish dish = db.Dishes.Find(id);
+            if (dish == null)
+            {
+                return HttpNotFound();
+            }
+            db.Dishes.Remove(dish);
+            db.SaveChanges();
+            return RedirectToAction(" Dishes");
         }
         public ActionResult DeleteIngredient(int? id)
         {

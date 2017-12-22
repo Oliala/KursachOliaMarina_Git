@@ -164,6 +164,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredientsController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -250,8 +251,12 @@
     <Content Include="Views\Admins\Dishes.cshtml" />
     <Content Include="Views\Admins\Ingredients.cshtml" />
     <Content Include="Views\Admins\Users.cshtml" />
+    <Content Include="Views\Admins\Menus.cshtml" />
+    <Content Include="Views\Admins\CreateMenu.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Store\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
