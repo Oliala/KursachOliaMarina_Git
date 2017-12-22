@@ -22,11 +22,19 @@ namespace KursachOliaMarina.Models
                     .Map(t => t.MapLeftKey("DishId")
                     .MapRightKey("IngredientId")
                     .ToTable("DishIngredient"));
+
             modelBuilder.Entity<Dish>().HasMany(d => d.Menus)
                     .WithMany(i => i.Dishes)
                     .Map(t => t.MapLeftKey("DishId")
                     .MapRightKey("MenuId")
                     .ToTable("DishMenu"));
+
+            modelBuilder.Entity<Zakaz>().HasMany(d => d.Menus)
+                   .WithMany(i => i.Zakazs)
+                   .Map(t => t.MapLeftKey("ZakazId")
+                   .MapRightKey("MenuId")
+                   .ToTable("ZakazMenu"));
+
         }
 
 
