@@ -105,7 +105,6 @@ namespace KursachOliaMarina.Controllers
             //}
             
             //ViewBag.ReadyDishes = readyDishes;
-            
         }
 
         public ActionResult CreateIngredient([Bind(Include = "Id,IngredientName")] Ingredient ingredient)
