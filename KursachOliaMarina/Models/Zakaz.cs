@@ -14,6 +14,15 @@ namespace KursachOliaMarina.Models
 
         // не знаю что еще, надо подумать
 
+        public virtual ICollection<Menu> Menus { get; set; }
+        
+
+        public Zakaz()
+        {
+            Menus = new List<Menu>();
+            
+        }
+
         public int? UserId { get; set; }
         public User User { get; set; }
     }
