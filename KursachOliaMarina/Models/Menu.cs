@@ -7,7 +7,7 @@ namespace KursachOliaMarina.Models
 {
     public class Menu
     {
-        public int Id;
+        public int Id { get; set; }
         public DateTime DateOfMenu { get; set; }
         public virtual ICollection<Dish> Dishes { get; set; }
 
