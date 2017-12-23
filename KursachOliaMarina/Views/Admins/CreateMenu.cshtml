@@ -5,22 +5,26 @@
 }
 
 <h2>Menus</h2>
-<div>
-    <select multiple class="form-control" name="Dish_Ids" id="name">
-        @foreach (var s in ViewBag.Dishes)
-        {
-            <option data-tokens="@s.DishName" value="@s.Id">
-                <bold>Название: </bold>@s.DishName,
-                <bold>Описание: </bold>@s.Weight,
-                <bold>Стоимость: </bold>@s.Price,
-                <bold>Стоимость: </bold>@s.Note
-            </option>
-        }
-    </select>
-
-    <td>
-        <input type="submit" formmethod="post" value="Добавить" class="btn btn-login" />
-    </td>
-    </table>
-</div>
+<form class="" method="post" action="/Store/AddMenu">
+    <input type="hidden" name="AdminId" value="@ViewBag.IdAdmin" />
+        <select multiple class="form-control" name="Dish_Ids" id="name">
+            @foreach (var s in ViewBag.Dishes)
+            {
+                <option data-tokens="@s.DishName" value="@s.Id">
+                    <bold>Название: </bold>@s.DishName,
+                    <bold>Описание: </bold>@s.Weight,
+                    <bold>Стоимость: </bold>@s.Price,
+                    <bold>Стоимость: </bold>@s.Note
+                </option>
             }
+        </select>
+    <div class="input-group">
+        <input type="date" class="form-control" name="DateOfMenu" id="dateOfMenu" placeholder="Дата" value="01.01.2000"  />
+    </div>
+      
+
+
+            <input type="submit" value="Добавить" id="button" />
+
+    </form>
+    }

@@ -1,4 +1,5 @@
-﻿@model KursachOliaMarina.Models.Dish
+﻿@using KursachOliaMarina.Models
+@model KursachOliaMarina.Models.Dish
 
 @{
     ViewBag.Title = "Details";
@@ -6,8 +7,52 @@
 }
 
 <h2>Details</h2>
+<fieldset>
+    <legend>Информация о студенте</legend>
 
-<div>
+    <div class="display-label"><b>Имя</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DishName)
+    </div>
+
+    <div class="display-label"><b>Фамилия</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category)
+    </div>
+
+    <div class="display-label"><b>Фамилия</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+    <div class="display-label"><b>Фамилия</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Weight)
+    </div>
+    <div class="display-label"><b>Фамилия</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Note)
+    </div>
+    <div class="display-label"><b>Фамилия</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Note)
+    </div>
+    <div class="display-label"><b>Курсы</b></div>
+    <ul>
+        @foreach (Ingredient c in Model.Ingredients)
+        {
+            <li>@c.IngredientName</li>
+        }
+    </ul>
+    <div>
+        @Html.ActionLink("Back to List", "Dishes", "Admins")
+    </div>
+
+</fieldset>
+
+
+
+
+<@*div>
     <h4>Dish</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -62,6 +107,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    
+    @Html.ActionLink("Back to List", "Dishes", "Admins")
+</p>*@

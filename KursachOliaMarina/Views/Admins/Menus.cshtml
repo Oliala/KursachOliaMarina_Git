@@ -1,12 +1,17 @@
 ﻿@model KursachOliaMarina.Models.CanteenContext
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<h2>Index</h2>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Menus.First().Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Menus.First().DateOfMenu)
         </th>
        
     </tr>
@@ -17,7 +22,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-            
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfMenu)
+            </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })

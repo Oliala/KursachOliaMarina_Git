@@ -31,46 +31,45 @@ namespace KursachOliaMarina.Controllers
             return menu;
         }
 
+    }
+    public class StoreController : Controller
+    {
+        CanteenContext db = new CanteenContext();
 
-        public class StoreController : Controller
+        [HttpPost]
+        public ActionResult AddMenu([ModelBinder(typeof(MenuBinder))] Menu menu, int[] Dish_Ids)
         {
-            CanteenContext db = new CanteenContext();
-
-            [HttpPost]
-            public ActionResult AddMenu([ModelBinder(typeof(MenuBinder))] Menu menu, int[] Dish_Ids)
+            menu.Dishes.Clear();
+            if (Dish_Ids != null)
             {
-                menu.Dishes.Clear();
-                if (Dish_Ids != null)
+                foreach (var c in db.Dishes.Where(c => Dish_Ids.Contains(c.Id)))
                 {
-                    foreach (var c in db.Dishes.Where(c => Dish_Ids.Contains(c.Id)))
-                    {
-                        menu.Dishes.Add(c);
-                    }
+                    menu.Dishes.Add(c);
                 }
-                db.Menus.Add(menu);
-                db.SaveChanges();
-                Admin admin = db.Admins.Where(c => c.Id == menu.AdminId).ToList().First();
-                string adminName = admin.Login;
-                var listuser = db.Users.Where(c => c.Email != null).ToList();
-                foreach (User r in listuser)
-                {
-
-                    //string email = user.Email.All;
-                    new EmailSender(r.Email, adminName, menu.DateOfMenu.ToShortDateString() + " " + menu.DateOfMenu.ToShortTimeString()).send();
-                   
-
-                }
-                return RedirectToAction("Menus", "Admins");
             }
+            db.Menus.Add(menu);
+            db.SaveChanges();
+            //Admin admin = db.Admins.Where(c => c.Id == menu.AdminId).ToList().First();
+            //string adminName = admin.Login;
+            //var listuser = db.Users.Where(c => c.Email != null).ToList();
+            //foreach (User r in listuser)
+            //{
+
+            //    //string email = user.Email.All;
+            //    new EmailSender(r.Email, adminName, menu.DateOfMenu.ToShortDateString() + " " + menu.DateOfMenu.ToShortTimeString()).send();
 
 
-            [HttpGet]
-            public ActionResult Delete(int id)
-            {
-                db.Menus.Remove(db.Menus.Find(id));
-                db.SaveChanges();
-                return RedirectToAction("Menus", "Admins");
-            }
+            //}
+            return RedirectToAction("Menus", "Admins");
+        }
+
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            db.Menus.Remove(db.Menus.Find(id));
+            db.SaveChanges();
+            return RedirectToAction("Menus", "Admins");
         }
     }
-    }
+}

@@ -51,7 +51,7 @@ namespace KursachOliaMarina.Controllers
             ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
             //int hc = db.Hairdressers.Count();
             //ViewBag.HairdressersCount = hc;
-            GetDataForAdmin();
+            //GetDataForAdmin();
             //ViewBag.UsersCount = db.Users.Count();
             //ViewBag.IngredientsCount = db.Ingredients.Count();
             //ViewBag.DishesCount = db.Dishes.Count();
@@ -68,6 +68,54 @@ namespace KursachOliaMarina.Controllers
             ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
             return View(db);
         }
+        public ActionResult DeleteUser(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            db.Users.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Users");
+        }
+        public ActionResult DetailsUser(int? id)
+        {
+            if (Session["admin"] == null)
+            {
+                ViewBag.LoginFaultMessage = "Ошибка доступа. Авторизируйтесь";
+                return RedirectToAction("Login");
+            }
+            return RedirectToAction("Details","Users");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public ActionResult CreateIngredient([Bind(Include = "Id,IngredientName")] Ingredient ingredient)
+        {
+            if (ModelState.IsValid)
+            {
+                // db.Ingredients.Add(ingredient);
+                // db.SaveChanges();
+            }
+            return RedirectToAction("Create", "Ingredients");
+        }
+
         public ActionResult Ingredients()
         {
             if (Session["admin"] == null)
@@ -77,7 +125,27 @@ namespace KursachOliaMarina.Controllers
             }
             ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
             return View(db);
+
         }
+        public ActionResult DeleteIngredient(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Ingredient ingredient = db.Ingredients.Find(id);
+            if (ingredient == null)
+            {
+                return HttpNotFound();
+            }
+            db.Ingredients.Remove(ingredient);
+            db.SaveChanges();
+            return RedirectToAction("Ingredients");
+        }
+
+
+
+
         public ActionResult Dishes()
         {
             if (Session["admin"] == null)
@@ -88,6 +156,42 @@ namespace KursachOliaMarina.Controllers
             ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
             return View(db);
         }
+        public ActionResult DetailsDish()
+        {
+            if (ModelState.IsValid)
+            {
+                // db.Dishes.Add(dish);
+                // db.SaveChanges();
+            }
+            return RedirectToAction("Details", "Dishes");
+        }
+        public ActionResult CreateDish([Bind(Include = "Id,DishName,Category,Price,Weight,Note")] Dish dish)
+        {
+            if (ModelState.IsValid)
+            {
+               // db.Dishes.Add(dish);
+               // db.SaveChanges();
+            }
+            return RedirectToAction("Create", "Dishes");
+        }
+        public ActionResult DeleteDish(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Dish dish = db.Dishes.Find(id);
+            if (dish == null)
+            {
+                return HttpNotFound();
+            }
+            db.Dishes.Remove(dish);
+            db.SaveChanges();
+            return RedirectToAction("Delete", "Dishes");
+        }
+
+
+
 
         public ActionResult CreateMenu()
         {
@@ -117,7 +221,7 @@ namespace KursachOliaMarina.Controllers
             Admin admin = (Admin)Session["admin"];
             IEnumerable<Dish> dishes = db.Dishes;
             ViewBag.Dishes = dishes;
-
+            ViewBag.IdAdmin = admin.Id;
             IList<Menu> menus = db.Menus.Where(f => f.Id.Equals(admin.Id)).ToList();
             IList<List<Dish>> selectedDishes = new List<List<Dish>>();
 
@@ -131,15 +235,7 @@ namespace KursachOliaMarina.Controllers
             ViewBag.SelectedDishes = selectedDishes;
         }
 
-        public ActionResult CreateIngredient([Bind(Include = "Id,IngredientName")] Ingredient ingredient)
-        {
-            if (ModelState.IsValid)
-            {
-               // db.Ingredients.Add(ingredient);
-               // db.SaveChanges();
-            }
-            return RedirectToAction("Create","Ingredients");
-        }
+      
 
         public ActionResult CreateAdditionMenu([Bind(Include = "Id,dateOfMenu")] Menu menu)
         {
@@ -150,135 +246,10 @@ namespace KursachOliaMarina.Controllers
             }
             return RedirectToAction("Menus");
         }
-        public ActionResult CreateDish([Bind(Include = "Id,DishName,Category,Price,Weight,Note")] Dish dish)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Dishes.Add(dish);
-                db.SaveChanges();
-            }
-            return RedirectToAction("Create","Dishes");
-        }
-        public ActionResult DeleteDish(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Dish dish = db.Dishes.Find(id);
-            if (dish == null)
-            {
-                return HttpNotFound();
-            }
-            db.Dishes.Remove(dish);
-            db.SaveChanges();
-            return RedirectToAction(" Dishes");
-        }
-        public ActionResult DeleteIngredient(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ingredient ingredient = db.Ingredients.Find(id);
-            if (ingredient == null)
-            {
-                return HttpNotFound();
-            }
-            db.Ingredients.Remove(ingredient);
-            db.SaveChanges();
-            return RedirectToAction("Ingredients");
-        }
-        // GET: Admins/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Admin admin = db.Admins.Find(id);
-            if (admin == null)
-            {
-                return HttpNotFound();
-            }
-            return View(admin);
-        }
-
-        // GET: Admins/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Admins/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Login,Password,Roles")] Admin admin)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Admins.Add(admin);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(admin);
-        }
-
-        // GET: Admins/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Admin admin = db.Admins.Find(id);
-            if (admin == null)
-            {
-                return HttpNotFound();
-            }
-            return View(admin);
-        }
-
-        // POST: Admins/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Login,Password,Roles")] Admin admin)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(admin).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(admin);
-        }
-
-        // GET: Admins/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Admin admin = db.Admins.Find(id);
-            if (admin == null)
-            {
-                return HttpNotFound();
-            }
-            return View(admin);
-        }
-
-        // POST: Admins/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Admin admin = db.Admins.Find(id);
-            db.Admins.Remove(admin);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        
+       
+      
+       
 
         protected override void Dispose(bool disposing)
         {
