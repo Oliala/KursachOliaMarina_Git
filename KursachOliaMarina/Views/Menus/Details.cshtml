@@ -1,34 +1,29 @@
-﻿@model KursachOliaMarina.Models.Menu
+﻿@using KursachOliaMarina.Models
+@model KursachOliaMarina.Models.Menu
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<fieldset>
+    <legend>Состав меню</legend>
 
-<div>
-    <h4>Menu</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Admin.Login)
-        </dt>
+    <div class="display-label"><b>Дата</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateOfMenu)
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Admin.Login)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateOfMenu)
-        </dt>
+    <div class="display-label"><b>Состав: </b></div>
+    <ul>
+        @foreach (Dish c in Model.Dishes)
+        {
+            <li>@c.DishName</li>
+        }
+    </ul>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateOfMenu)
-        </dd>
-
-    </dl>
-</div>
+</fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
