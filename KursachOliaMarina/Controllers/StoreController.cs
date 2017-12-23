@@ -4,66 +4,73 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KursachOliaMarina.Models;
+using KursachOliaMarina.Utils;
 
 namespace KursachOliaMarina.Controllers
 {
-   // public class OrderBinder : IModelBinder
-   // {
-        //public object BindModel(ControllerContext controllerContext,
-         //                       ModelBindingContext bindingContext)
-        //{
-            //HttpRequestBase request = controllerContext.HttpContext.Request;
+    public class MenuBinder : IModelBinder
+    {
+        public object BindModel(ControllerContext controllerContext,
+                                ModelBindingContext bindingContext)
+        {
+            HttpRequestBase request = controllerContext.HttpContext.Request;
 
-            //int clientId = Int32.Parse(request.Form.Get("ClientId"));
+            int adminId = Int32.Parse(request.Form.Get("AdminId"));
             //int hairStyleId = Int32.Parse(request.Form.Get("HairStyleId"));
             //int hairdresserId = Int32.Parse(request.Form.Get("HairdresserId"));
-            //string date = request.Form.Get("Date");
+            string date = request.Form.Get("DateOfMenu");
             //string time = request.Form.Get("Time");
-            //string[] dateParts = date.Split(new char[] { '-' });
+            string[] dateParts = date.Split(new char[] { '-' });
             //string[] timeParts = time.Split(new char[] { '.' });
-            //Order order = new Order
-            //{
-            //    ClientId = clientId,
-            //    HairdresserId = hairdresserId,
-            //    HairStyleId = hairStyleId,
-            //    Date = new DateTime(Convert.ToInt32(dateParts[0]), Convert.ToInt32(dateParts[1]), Convert.ToInt32(dateParts[2]),
-            //                        Convert.ToInt32(timeParts[0]), 0, 0)
-            //};
-            //return order;
+            Menu menu = new Menu
+            {
+                AdminId = adminId,
+
+                DateOfMenu = new DateTime(Convert.ToInt32(dateParts[0]), Convert.ToInt32(dateParts[1]), Convert.ToInt32(dateParts[2]))
+            };
+            return menu;
         }
-   // }
 
-    //public class StoreController : Controller
-    //{
-    //    CanteenContext db = new CanteenContext();
 
-    //    [HttpPost]
-    //    public ActionResult AddMenu([ModelBinder(typeof(MenuBinder))] Menu menu, int[] Menu_Ids)
-    //    {
-    //        order.Services.Clear();
-    //        if (Service_Ids != null)
-    //        {
-    //            foreach (var c in db.Services.Where(c => Service_Ids.Contains(c.Id)))
-    //            {
-    //                order.Services.Add(c);
-    //            }
-    //        }
-    //        db.Orders.Add(order);
-    //        db.SaveChanges();
-    //        Client client = db.Clients.Where(c => c.Id == order.ClientId).ToList().First();
-    //        string userName = client.Name;
-    //        Hairdresser hairdersser = db.Hairdressers.Where(c => c.Id == order.HairdresserId).ToList().First();
-    //        string email = hairdersser.Email;
-    //        new EmailSender(email, userName, order.Date.ToShortDateString() + " " + order.Date.ToShortTimeString()).send();
-    //        return RedirectToAction("IndexClient", "Login");
-    //    }
+        public class StoreController : Controller
+        {
+            CanteenContext db = new CanteenContext();
 
-    //    [HttpGet]
-    //    public ActionResult Delete(int id)
-    //    {
-    //        db.Orders.Remove(db.Orders.Find(id));
-    //        db.SaveChanges();
-    //        return RedirectToAction("IndexClient", "Login");
-    //    }
-    //}
-//}
+            [HttpPost]
+            public ActionResult AddMenu([ModelBinder(typeof(MenuBinder))] Menu menu, int[] Dish_Ids)
+            {
+                menu.Dishes.Clear();
+                if (Dish_Ids != null)
+                {
+                    foreach (var c in db.Dishes.Where(c => Dish_Ids.Contains(c.Id)))
+                    {
+                        menu.Dishes.Add(c);
+                    }
+                }
+                db.Menus.Add(menu);
+                db.SaveChanges();
+                Admin admin = db.Admins.Where(c => c.Id == menu.AdminId).ToList().First();
+                string adminName = admin.Login;
+                var listuser = db.Users.Where(c => c.Email != null).ToList();
+                foreach (User r in listuser)
+                {
+
+                    //string email = user.Email.All;
+                    new EmailSender(r.Email, adminName, menu.DateOfMenu.ToShortDateString() + " " + menu.DateOfMenu.ToShortTimeString()).send();
+                   
+
+                }
+                return RedirectToAction("Menus", "Admins");
+            }
+
+
+            [HttpGet]
+            public ActionResult Delete(int id)
+            {
+                db.Menus.Remove(db.Menus.Find(id));
+                db.SaveChanges();
+                return RedirectToAction("Menus", "Admins");
+            }
+        }
+    }
+    }

@@ -46,7 +46,7 @@ namespace KursachOliaMarina.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DishName,Category,Price,Weight,Popularity,Weekday,Note")] Dish dish)
+        public ActionResult Create([Bind(Include = "Id,DishName,Category,Price,Weight,Popularity,Note")] Dish dish)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace KursachOliaMarina.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DishName,Category,Price,Weight,Popularity,Weekday,Note")] Dish dish)
+        public ActionResult Edit([Bind(Include = "Id,DishName,Category,Price,Weight,Popularity,Note")] Dish dish)
         {
             if (ModelState.IsValid)
             {

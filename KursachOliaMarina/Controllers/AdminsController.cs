@@ -128,17 +128,17 @@ namespace KursachOliaMarina.Controllers
 
             }
 
-            ViewBag.ReadyDishes = selectedDishes;
+            ViewBag.SelectedDishes = selectedDishes;
         }
 
         public ActionResult CreateIngredient([Bind(Include = "Id,IngredientName")] Ingredient ingredient)
         {
             if (ModelState.IsValid)
             {
-                db.Ingredients.Add(ingredient);
-                db.SaveChanges();
+               // db.Ingredients.Add(ingredient);
+               // db.SaveChanges();
             }
-            return RedirectToAction("Ingredients");
+            return RedirectToAction("Create","Ingredients");
         }
 
         public ActionResult CreateAdditionMenu([Bind(Include = "Id,dateOfMenu")] Menu menu)

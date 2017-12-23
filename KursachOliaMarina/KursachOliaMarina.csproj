@@ -178,6 +178,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Zakaz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\EmailSender.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Canteen.mdf" />
@@ -222,16 +223,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Ingredients\Create.cshtml" />
-    <Content Include="Views\Ingredients\Delete.cshtml" />
-    <Content Include="Views\Ingredients\Details.cshtml" />
-    <Content Include="Views\Ingredients\Edit.cshtml" />
-    <Content Include="Views\Ingredients\Index.cshtml" />
-    <Content Include="Views\Dishes\Index.cshtml" />
-    <Content Include="Views\Dishes\Create.cshtml" />
-    <Content Include="Views\Dishes\Delete.cshtml" />
-    <Content Include="Views\Dishes\Details.cshtml" />
-    <Content Include="Views\Dishes\Edit.cshtml" />
     <Content Include="Views\Zakazs\Index.cshtml" />
     <Content Include="Views\Zakazs\Create.cshtml" />
     <Content Include="Views\Zakazs\Delete.cshtml" />
@@ -253,6 +244,16 @@
     <Content Include="Views\Admins\Users.cshtml" />
     <Content Include="Views\Admins\Menus.cshtml" />
     <Content Include="Views\Admins\CreateMenu.cshtml" />
+    <Content Include="Views\Dishes\Create.cshtml" />
+    <Content Include="Views\Dishes\Delete.cshtml" />
+    <Content Include="Views\Dishes\Details.cshtml" />
+    <Content Include="Views\Dishes\Edit.cshtml" />
+    <Content Include="Views\Dishes\Index.cshtml" />
+    <Content Include="Views\Ingredients\Create.cshtml" />
+    <Content Include="Views\Ingredients\Delete.cshtml" />
+    <Content Include="Views\Ingredients\Details.cshtml" />
+    <Content Include="Views\Ingredients\Edit.cshtml" />
+    <Content Include="Views\Ingredients\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Store\" />
