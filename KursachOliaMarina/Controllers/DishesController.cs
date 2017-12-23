@@ -46,30 +46,35 @@ namespace KursachOliaMarina.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DishName,Category,Price,Weight,Popularity,Note")] Dish dish)
+        public ActionResult Create(Dish dish, int[] ingredients)
         {
-            if (ModelState.IsValid)
-            {
-                db.Dishes.Add(dish);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            Dish newDish = new Dish();
+            newDish.DishName = dish.DishName;
+            newDish.Category = dish.Category;
+            newDish.Price = dish.Price;
+            newDish.Weight = dish.Weight;
+            newDish.Note = dish.Note;
+            newDish.Popularity = dish.Popularity;
 
-            return View(dish);
+            foreach (var c in db.Ingredients)
+                {
+                    newDish.Ingredients.Add(c);
+                }
+
+            db.Dishes.Add(newDish);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Dishes/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id = 0)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Dish dish = db.Dishes.Find(id);
             if (dish == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.Ingredients = db.Ingredients.ToList();
             return View(dish);
         }
 
@@ -78,15 +83,30 @@ namespace KursachOliaMarina.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DishName,Category,Price,Weight,Popularity,Note")] Dish dish)
+        public ActionResult Edit(Dish dish, int[] usedIngredients)
         {
-            if (ModelState.IsValid)
+            Dish newDish = db.Dishes.Find(dish.Id);
+            newDish.DishName = dish.DishName;
+            newDish.Category = dish.Category;
+            newDish.Price = dish.Price;
+            newDish.Weight = dish.Weight;
+            newDish.Note = dish.Note;
+            newDish.Popularity = dish.Popularity;
+
+
+            newDish.Ingredients.Clear();
+            if (usedIngredients != null)
             {
-                db.Entry(dish).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //получаем выбранные курсы
+                foreach (var c in db.Ingredients.Where(co => usedIngredients.Contains(co.Id)))
+                {
+                    newDish.Ingredients.Add(c);
+                }
             }
-            return View(dish);
+
+            db.Entry(newDish).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Dishes/Delete/5
@@ -113,6 +133,11 @@ namespace KursachOliaMarina.Controllers
             db.Dishes.Remove(dish);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult CreateMenu()
+        {
+            return RedirectToAction("CreateMenu", "Admins");
         }
 
         protected override void Dispose(bool disposing)

@@ -124,7 +124,7 @@ namespace KursachOliaMarina.Controllers
                 return RedirectToAction("Login");
             }
             ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
-            return View(db);
+            return RedirectToAction("Index", "Ingredients");
 
         }
         public ActionResult DeleteIngredient(int? id)
@@ -154,26 +154,41 @@ namespace KursachOliaMarina.Controllers
                 return RedirectToAction("Login");
             }
             ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
-            return View(db);
+            return RedirectToAction("Index", "Dishes");
         }
+
         public ActionResult DetailsDish()
         {
             if (ModelState.IsValid)
             {
+                return RedirectToAction("Details", "Dishes");
                 // db.Dishes.Add(dish);
                 // db.SaveChanges();
             }
-            return RedirectToAction("Details", "Dishes");
+            return RedirectToAction("Dishes");
         }
         public ActionResult CreateDish([Bind(Include = "Id,DishName,Category,Price,Weight,Note")] Dish dish)
         {
             if (ModelState.IsValid)
             {
-               // db.Dishes.Add(dish);
-               // db.SaveChanges();
+                
+                // db.Dishes.Add(dish);
+                // db.SaveChanges();
             }
             return RedirectToAction("Create", "Dishes");
         }
+
+        public ActionResult EditDish([Bind(Include = "Id,DishName,Category,Price,Weight,Note")] Dish dish)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Edit", "Dishes");
+                // db.Dishes.Add(dish);
+                // db.SaveChanges();
+            }
+            return RedirectToAction("Dishes");
+        }
+
         public ActionResult DeleteDish(int? id)
         {
             if (id == null)
@@ -187,7 +202,7 @@ namespace KursachOliaMarina.Controllers
             }
             db.Dishes.Remove(dish);
             db.SaveChanges();
-            return RedirectToAction("Delete", "Dishes");
+            return RedirectToAction("Dishes");
         }
 
 

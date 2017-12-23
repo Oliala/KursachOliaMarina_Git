@@ -10,103 +10,43 @@
 <fieldset>
     <legend>Информация о студенте</legend>
 
-    <div class="display-label"><b>Имя</b></div>
+    <div class="display-label"><b>Название блюда</b></div>
     <div class="display-field">
         @Html.DisplayFor(model => model.DishName)
     </div>
 
-    <div class="display-label"><b>Фамилия</b></div>
+    <div class="display-label"><b>Категория</b></div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Category)
     </div>
 
-    <div class="display-label"><b>Фамилия</b></div>
+    <div class="display-label"><b>Цена, грн</b></div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Price)
     </div>
-    <div class="display-label"><b>Фамилия</b></div>
+
+    <div class="display-label"><b>Вес, г</b></div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Weight)
     </div>
-    <div class="display-label"><b>Фамилия</b></div>
+
+    <div class="display-label"><b>Приметка</b></div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Note)
     </div>
-    <div class="display-label"><b>Фамилия</b></div>
+
+    <div class="display-label"><b>Популярность</b></div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Note)
+        @Html.DisplayFor(model => model.Popularity)
     </div>
-    <div class="display-label"><b>Курсы</b></div>
+
+    <div class="display-label"><b>Состав: </b></div>
     <ul>
         @foreach (Ingredient c in Model.Ingredients)
         {
             <li>@c.IngredientName</li>
         }
     </ul>
-    <div>
-        @Html.ActionLink("Back to List", "Dishes", "Admins")
-    </div>
 
 </fieldset>
 
-
-
-
-<@*div>
-    <h4>Dish</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DishName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DishName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Weight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Weight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Popularity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Popularity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    
-    @Html.ActionLink("Back to List", "Dishes", "Admins")
-</p>*@
