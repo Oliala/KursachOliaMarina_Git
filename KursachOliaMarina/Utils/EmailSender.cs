@@ -24,12 +24,12 @@ namespace KursachOliaMarina.Utils
     public class EmailSender
     {
         private string to = null;
-        private string user = null;
-        private string orderDatetime = null;
+        //private string user = null;
+        private string DateOfMenu = null;
 
         private static string defautEmailHost = "smtp.gmail.com";
         private static Int32 defautEmailPort = 587;
-        private static string defautEmaiFrom = "sssr_stolovaya@gmail.com";
+        private static string defautEmaiFrom = "sssr.stolovaya@gmail.com";
         private static string defautEmailPassword = "canteen_123";
         private static string defautEmailDisplayName = "Canteen";
 
@@ -41,13 +41,21 @@ namespace KursachOliaMarina.Utils
         private string defaultSubject = "New haircut order from ";
         private string defaultBody;
 
-        public EmailSender(string to, string user, string orderDatetime)
+        //public EmailSender(string to, string user, string orderDatetime)
+        //{
+        //    this.to = to;
+        //    this.user = user;
+        //    this.orderDatetime = orderDatetime;
+        //    source = new EmailSource(defautEmailHost, defautEmailPort, defautEmaiFrom, defautEmailPassword, defautEmailDisplayName);
+        //    defaultBody = createDefaultBody(user, orderDatetime);
+        //}
+        public EmailSender(string to, string DateOfMenu)
         {
             this.to = to;
-            this.user = user;
-            this.orderDatetime = orderDatetime;
+            //this.user = user;
+            this.DateOfMenu = DateOfMenu;
             source = new EmailSource(defautEmailHost, defautEmailPort, defautEmaiFrom, defautEmailPassword, defautEmailDisplayName);
-            defaultBody = createDefaultBody(user, orderDatetime);
+            defaultBody = createDefaultBody(DateOfMenu);
         }
 
         public EmailSender setSource(EmailSource source)
@@ -84,7 +92,7 @@ namespace KursachOliaMarina.Utils
             // Specify the message content.
             MailMessage message = new MailMessage(from, sendto);
             if (subject == null)
-                message.Subject = defaultSubject + user;
+                message.Subject = defaultSubject ;
             else
                 message.Subject = subject;
             message.SubjectEncoding = System.Text.Encoding.UTF8;
@@ -107,10 +115,10 @@ namespace KursachOliaMarina.Utils
             return true;
         }
 
-        private static string createDefaultBody(string user, string orderDatetime)
+        private static string createDefaultBody( string DateOfMenu)
         {
             string body = "Здравствуйте! Предлагаем Вам ознакомиться с сегодняшним меню!" +
-                "\n\nThe client named " + user + " has left an order on " + orderDatetime + "." +
+                "\n\nThe client named  has left an order on " + DateOfMenu + "." +
                 "\n To watch all your orders open your cabinet.";
             return body;
 
