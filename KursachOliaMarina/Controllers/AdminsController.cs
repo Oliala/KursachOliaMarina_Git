@@ -227,8 +227,7 @@ namespace KursachOliaMarina.Controllers
                 return RedirectToAction("Login");
             }
             ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
-            
-            return View();
+            return RedirectToAction("Index", "Menus");
         }
 
         public void GetDataForAdmin()

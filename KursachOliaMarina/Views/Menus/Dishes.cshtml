@@ -1,0 +1,50 @@
+@model KursachOliaMarina.Models.CanteenContext
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "CreateDish")
+</p>
+<p>
+    @Html.ActionLink("Create menu", "CreateMenu")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Dishes.First().DishName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dishes.First().Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dishes.First().Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dishes.First().Note)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Dishes)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DishName)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            
+        </tr>
+    }
+
+</table>
+

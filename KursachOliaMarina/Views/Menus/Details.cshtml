@@ -1,0 +1,35 @@
+﻿@model KursachOliaMarina.Models.Menu
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Menu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin.Login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin.Login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfMenu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfMenu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
