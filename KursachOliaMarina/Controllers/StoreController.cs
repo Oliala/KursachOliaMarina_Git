@@ -51,15 +51,15 @@ namespace KursachOliaMarina.Controllers
             db.SaveChanges();
             //Admin admin = db.Admins.Where(c => c.Id == menu.AdminId).ToList().First();
             //string adminName = admin.Login;
-            var listuser = db.Users.Where(c => c.Email != null).ToList();
-            foreach (User r in listuser)
-            {
+ //           var listuser = db.Users.Where(c => c.Email != null).ToList();
+ //           foreach (User r in listuser)
+ //           {
 
                 //string email = user.Email.All;
-                new EmailSender(r.Email,  menu.DateOfMenu.ToShortDateString() + " " + menu.DateOfMenu.ToShortTimeString()).send();
+//                new EmailSender(r.Email,  menu.DateOfMenu.ToShortDateString() + " " + menu.DateOfMenu.ToShortTimeString()).send();
 
 
-            }
+//            }
             return RedirectToAction("Menus", "Admins");
         }
 

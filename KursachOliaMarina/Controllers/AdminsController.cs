@@ -161,6 +161,7 @@ namespace KursachOliaMarina.Controllers
         {
             if (ModelState.IsValid)
             {
+               // int idCurrentMenu = (from m in db.Menus select m.Id).ToList().Last();
                 return RedirectToAction("Details", "Dishes");
                 // db.Dishes.Add(dish);
                 // db.SaveChanges();

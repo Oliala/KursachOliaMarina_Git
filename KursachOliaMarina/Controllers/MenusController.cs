@@ -22,8 +22,9 @@ namespace KursachOliaMarina.Controllers
         }
 
         // GET: Menus/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
+            int? id = (from m in db.Menus select m.Id).ToList().Last();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
