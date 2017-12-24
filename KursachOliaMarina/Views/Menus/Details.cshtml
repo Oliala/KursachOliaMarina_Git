@@ -1,5 +1,5 @@
 ﻿@using KursachOliaMarina.Models
-@model KursachOliaMarina.Models.Menu
+@model Menu
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 }
 
 <fieldset>
-    <legend>Состав меню</legend>
+    <legend>Меню</legend>
 
     <div class="display-label"><b>Дата</b></div>
     <div class="display-field">
@@ -19,12 +19,9 @@
     <ul>
         @foreach (Dish c in Model.Dishes)
         {
-            <li>@c.DishName</li>
+            <li><b>@c.DishName </b> <br> Цена: @c.Price Вес: @c.Weight</li>
         }
     </ul>
 
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

@@ -23,12 +23,17 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Топ 10 блюд", "TopDishes", "Dishes")</li>
                     <li>@Html.ActionLink("Топ 10 клиентов", "TopUsers", "Users")</li>
-                    <li>@Html.ActionLink("Меню", "Details", "Menus")</li>
+                    <li>@Html.ActionLink("Меню", "Details/1", "Menus")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                 <li>@Html.ActionLink("ЛогинАдмин", "Login", "Admins")</li>
-                    <li>@Html.ActionLink("ЛогинUser", "LoginUser", "Users")</li>
-                    <li>@Html.ActionLink("RegistUser", "Index", "Registration")</li>
+                    <li class="dropdown">
+                    <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Войти на сайт<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Клиент", "LoginUser", "Users")</li>
+                        <li>@Html.ActionLink("Админ", "Login", "Admins")</li>
+                    </ul>
+                </li>
+                <li>@Html.ActionLink("Зарегистрироваться", "Index", "Registration")</li></a></li>
                 </ul>
             </div>
         </div>

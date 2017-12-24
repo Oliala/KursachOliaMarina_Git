@@ -22,26 +22,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Топ 10 блюд", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Топ 10 клиентов", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Меню", "Menus", "Admins")</li>
+                    <li>@Html.ActionLink("Топ 10 блюд", "TopDishes", "Dishes")</li>
+                    <li>@Html.ActionLink("Топ 10 клиентов", "TopUsers", "Users")</li>
+                    <li>@Html.ActionLink("Меню", "Details/1", "Menus")</li>
 
                 </ul>
                  <ul class="nav navbar-nav navbar-right">
-                 <div class="menu">
-                <ul>
-                    <li><a class="hide">Личный кабинет</a>
-                        <ul class="submenu">
-                            <li>@Html.ActionLink("Блюда", "Dishes", "Admins")</li>
-                            <li>@Html.ActionLink("Ингредиенты", "Ingredients", "Admins")</li>
-                            <li>@Html.ActionLink("Клиенты", "Users", "Admins")</li>
-                        </ul>
-                    </li>
-                </ul>
+                    <li class="dropdown">
+                    <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Личный кабинет <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Блюда", "Index", "Dishes")</li>
+                        <li>@Html.ActionLink("Ингредиенты", "Index", "Ingredients")</li>
+                        <li>@Html.ActionLink("Клиенты", "Users", "Admins")</li>
+                    </ul>
+                </li>
                 <li><a id = "text-menu" href="/Admins/Logout">Выход </a></li>
-            </div> 
                 </ul>
-
             </div>
         </div>
     </div>
