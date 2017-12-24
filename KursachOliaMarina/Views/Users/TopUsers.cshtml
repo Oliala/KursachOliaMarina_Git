@@ -1,0 +1,20 @@
+﻿@model IList<KursachOliaMarina.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Лучшие клиенты</h2>
+
+<form>
+            @foreach (var s in ViewBag.Users)
+            {
+                <option data-tokens="@s.LName" value="@s.Id">
+                    <bold>ИМЯ: </bold>@s.LName,
+                    <bold></bold>@s.FName,
+                </option>
+            }
+        </select>
+</form>
+

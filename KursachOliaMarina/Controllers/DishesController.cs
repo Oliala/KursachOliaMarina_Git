@@ -140,6 +140,16 @@ namespace KursachOliaMarina.Controllers
             return RedirectToAction("CreateMenu", "Admins");
         }
 
+        public ActionResult TopDishes()
+        {
+ //           IEnumerable<Dish> dishes = db.D.Where(z => z.Sex.Equals(client.Sex));
+            IEnumerable<Dish> dishes = db.Dishes.OrderByDescending(z => z.Popularity).Take(10);
+            ViewBag.Dishes = dishes;
+            return View();
+
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

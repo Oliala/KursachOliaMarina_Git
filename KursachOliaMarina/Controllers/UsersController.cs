@@ -209,6 +209,15 @@ namespace KursachOliaMarina.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult TopUsers()
+        {
+            //           IEnumerable<Dish> dishes = db.D.Where(z => z.Sex.Equals(client.Sex));
+            IEnumerable<User> users = db.Users.OrderByDescending(z => z.Visit).Take(10);
+            ViewBag.Users = users;
+            return View();
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

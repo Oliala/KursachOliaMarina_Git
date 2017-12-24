@@ -1,0 +1,20 @@
+﻿@model IList<KursachOliaMarina.Models.Dish>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Топ блюд</h2>
+
+<form>
+            @foreach (var s in ViewBag.Dishes)
+            {
+                <option data-tokens="@s.DishName" value="@s.Id">
+                    <bold></bold>@s.DishName,
+                    <bold>Популярность </bold>@s.Popularity,
+                </option>
+            }
+        </select>
+</form>
+
