@@ -263,6 +263,7 @@
     <Content Include="Views\Menus\Edit.cshtml" />
     <Content Include="Views\Dishes\TopDishes.cshtml" />
     <Content Include="Views\Users\TopUsers.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Store\" />

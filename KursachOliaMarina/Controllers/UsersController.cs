@@ -35,7 +35,7 @@ namespace KursachOliaMarina.Controllers
         }
 
         [HttpGet]
-        public ActionResult IndexUser()
+        public ActionResult Index()
         {
             if (Session["user"] == null)
             {
