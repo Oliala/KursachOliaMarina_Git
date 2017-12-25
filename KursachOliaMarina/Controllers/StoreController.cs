@@ -32,6 +32,33 @@ namespace KursachOliaMarina.Controllers
         }
 
     }
+    public class ZakazBinder : IModelBinder
+    {
+        public object BindModel(ControllerContext controllerContext,
+                                ModelBindingContext bindingContext)
+        {
+            HttpRequestBase request = controllerContext.HttpContext.Request;
+
+            int userId = Int32.Parse(request.Form.Get("userId"));
+            //int hairStyleId = Int32.Parse(request.Form.Get("HairStyleId"));
+            //int hairdresserId = Int32.Parse(request.Form.Get("HairdresserId"));
+            string date = request.Form.Get("DateOfZakaz");
+            //string time = request.Form.Get("Time");
+            string[] dateParts = date.Split(new char[] { '-' });
+            //string[] timeParts = time.Split(new char[] { '.' });
+            Zakaz zakaz = new Zakaz
+            {
+                UserId = userId,
+
+                DateOfZakaz = new DateTime(Convert.ToInt32(dateParts[0]), Convert.ToInt32(dateParts[1]), Convert.ToInt32(dateParts[2]))
+            };
+            return zakaz;
+        }
+
+    }
+
+
+
     public class StoreController : Controller
     {
         CanteenContext db = new CanteenContext();
@@ -63,13 +90,30 @@ namespace KursachOliaMarina.Controllers
             return RedirectToAction("Menus", "Admins");
         }
 
-
+       
         [HttpGet]
         public ActionResult Delete(int id)
         {
             db.Menus.Remove(db.Menus.Find(id));
             db.SaveChanges();
             return RedirectToAction("Menus", "Admins");
+        }
+
+        [HttpPost]
+        public ActionResult AddZakaz([ModelBinder(typeof(ZakazBinder))] Zakaz zakaz, int[] Menu_Ids)
+        {
+            zakaz.Menus.Clear();
+            if (Menu_Ids != null)
+            {
+                foreach (var c in db.Menus.Where(c => Menu_Ids.Contains(c.Id)))
+                {
+                    zakaz.Menus.Add(c);
+                }
+            }
+            db.Zakazs.Add(zakaz);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Users");
         }
     }
 }

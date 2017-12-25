@@ -29,7 +29,7 @@ namespace KursachOliaMarina.Controllers
             {
                 User user = (User)Session["user"];
                
-                return RedirectToAction("IndexUser", "Users");
+                return RedirectToAction("Index", "Users");
             }
             return View();
         }
@@ -56,44 +56,46 @@ namespace KursachOliaMarina.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult CreateZakaz()
+        {
+            if (Session["user"] == null)
+            {
+                ViewBag.LoginFaultMessage = "Ошибка доступа. Авторизируйтесь";
+                return RedirectToAction("LoginUser");
+            }
+            ViewBag.LoginUser = ((Admin)Session["user"]).Login;
+            GetDataForUser();
+            return View();
+        }
+
         public void GetDataForUser()
         {
             User user = (User)Session["user"];
-            //IEnumerable<HairStyle> hairStyles = db.HairStyles.Where(z => z.Sex.Equals(client.Sex));
-            //ViewBag.HairStyles = hairStyles;
-            //IEnumerable<Service> services = db.Services.Where(z => z.Sex.Equals(client.Sex) || z.Sex.Equals("a"));
-            //ViewBag.Services = services;
-            //ViewBag.Login = client.Login;
-            //IEnumerable<Hairdresser> hairDressers = db.Hairdressers;
-            //ViewBag.HairDressers = hairDressers;
-            //ViewBag.IdClient = client.Id;
-            IList<Zakaz> zakazs = db.Zakazs.Where(f => f.UserId.Equals(user.Id)).ToList();
-            //IList<HairStyle> orderedHairstyles = new List<HairStyle>();
-            //IList<Hairdresser> orderedHairdressers = new List<Hairdresser>();
-            //IList<List<Service>> orderedServices = new List<List<Service>>();
-            //List<double> orderCosts = new List<double>();
+            IEnumerable<Dish> dishes = db.Dishes;
+            ViewBag.Dishes = dishes;
+            ViewBag.IdUser = user.Id;
+            IList<Zakaz> zakazs = db.Zakazs.Where(f => f.Id.Equals(user.Id)).ToList();
+
+            IList<List<Menu>> selectedMenus = new List<List<Menu>>();
+
             foreach (Zakaz zakaz in zakazs)
             {
-            //    //get hairstyle of current order
-            //    orderedHairstyles.Add(db.HairStyles.Where(s =>
-            //        s.Id == order.HairStyleId).ToList().First());
-            //    //hairdresser
-            //    orderedHairdressers.Add(db.Hairdressers.Where(d =>
-            //        d.Id == order.HairdresserId).ToList().First());
-            //    //list of services
-            //    orderedServices.Add(order.Services.ToList());
-            //    double cost = db.HairStyles.Where(s => s.Id == order.HairStyleId).ToList().First().Cost;
-            //    foreach (Service service in order.Services.ToList())
-            //    {
-            //        cost += service.Cost;
-            //    }
-            //    orderCosts.Add(cost);
+
+                selectedMenus.Add(zakaz.Menus.ToList());
+
             }
-            //ViewBag.OrderedHairstyles = orderedHairstyles;
-            //ViewBag.OrderedHairdressers = orderedHairdressers;
-            //ViewBag.Orders = orders;
-            //ViewBag.OrderedServices = orderedServices;
-            //ViewBag.CostOfOrders = orderCosts;
+
+            ViewBag.SelectedMenus = selectedMenus;
+            //IList<List<List<Dish>>> selectedDishes = new List<List<List<Dish>>>();
+
+            //foreach (Zakaz zakaz in zakazs)
+            //{
+
+            //    selectedDishes.Add(zakaz.Dishes.ToList());
+
+            //}
+
+            //ViewBag.SelectedDishes = selectedDishes;
         }
 
 

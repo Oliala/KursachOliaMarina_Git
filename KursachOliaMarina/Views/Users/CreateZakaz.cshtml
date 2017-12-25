@@ -1,0 +1,24 @@
+﻿@model KursachOliaMarina.Models.CanteenContext
+@{
+    ViewBag.Title = "CreateZakaz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateZakaz</h2>
+
+<form class="" method="post" action="/Store/AddZakaz">
+    <input type="hidden" name="UserId" value="@ViewBag.IdAdmin" />
+    <select multiple class="form-control" name="Menu_Ids" id="name">
+        @foreach (var s in ViewBag.Menus)
+            {
+            <option data-tokens="@s.Id" value="@s.Id">
+                <bold>Название: </bold>@s.DateOfMenu
+                
+            </option>
+        }
+    </select>
+    <div class="input-group">
+        <input type="date" class="form-control" name="DateOfZakaz" id="dateOfZakaz" placeholder="Дата" value="01.01.2000" />
+    </div>
+    <input type="submit" value="Добавить" id="button" />
+</form>
