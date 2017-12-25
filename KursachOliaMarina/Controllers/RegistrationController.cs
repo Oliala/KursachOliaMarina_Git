@@ -19,6 +19,7 @@ namespace KursachOliaMarina.Controllers
         {
             return View();
         }
+
         public ActionResult Back()
         {
             return RedirectToAction("Index", "Home");
@@ -36,7 +37,7 @@ namespace KursachOliaMarina.Controllers
                     db.Users.Add(user);
                     db.SaveChanges();
                     Session["user"] = user;
-                    return RedirectToAction("LoginUser", "Users");
+                    return RedirectToAction("Index", "Users");
                 }
                 else
                 {
