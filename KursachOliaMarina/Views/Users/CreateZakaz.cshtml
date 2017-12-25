@@ -9,11 +9,11 @@
 <form class="" method="post" action="/Store/AddZakaz">
     <input type="hidden" name="UserId" value="@ViewBag.IdUser" />
     <select multiple class="form-control" name="Menu_Ids" id="name">
-        @foreach (var s in ViewBag.Menus)
+        @foreach (var d in ViewBag.SelectedDishes)
             {
-            <option data-tokens="@s.Id" value="@s.Id">
-                <bold>Название: </bold>@s.DateOfMenu
-                
+            <option data-tokens="@d.Id" value="@d.Id">
+                <bold>Название: </bold>@d.DishName
+
             </option>
         }
     </select>
