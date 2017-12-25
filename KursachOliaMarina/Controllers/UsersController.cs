@@ -14,6 +14,8 @@ namespace KursachOliaMarina.Controllers
     {
         private CanteenContext db = new CanteenContext();
 
+        
+
         [HttpGet]
         public ActionResult LogoutUser()
         {
@@ -34,6 +36,23 @@ namespace KursachOliaMarina.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult LoginUserForm(string Email, string Password, bool Remember = false)
+        {
+            List<User> userList = db.Users.Where(a => a.Email.Equals(Email) && a.Password.Equals(Password)).ToList();
+            if (userList.Count == 1)
+            {
+                ViewBag.LoginFaultMessage = null;
+                User user = userList.First();
+                Session["user"] = user;
+                if (Remember)
+                    Session["remember"] = "remember";
+                return RedirectToAction("Index", "Users");
+            }
+            ViewBag.LoginFaultMessage = "Не верная пара логин/пароль";
+            return View("LoginUser");
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -42,7 +61,7 @@ namespace KursachOliaMarina.Controllers
                 return RedirectToAction("LoginUser", "Users");
             }
             User user = (User)Session["user"];
-           // GetDataForClient();
+          // GetDataForUser();
             return View();
         }
 
@@ -63,7 +82,7 @@ namespace KursachOliaMarina.Controllers
                 ViewBag.LoginFaultMessage = "Ошибка доступа. Авторизируйтесь";
                 return RedirectToAction("LoginUser");
             }
-            ViewBag.LoginUser = ((Admin)Session["user"]).Login;
+            ViewBag.LoginUser = ((User)Session["user"]).Email;
             GetDataForUser();
             return View();
         }
@@ -71,13 +90,13 @@ namespace KursachOliaMarina.Controllers
         public void GetDataForUser()
         {
             User user = (User)Session["user"];
-            IEnumerable<Dish> dishes = db.Dishes;
-            ViewBag.Dishes = dishes;
+            IEnumerable<Menu> currentmenus = db.Menus.OrderByDescending(f =>f.Id).Take(1);
+            ViewBag.Menus = currentmenus;
             ViewBag.IdUser = user.Id;
             IList<Zakaz> zakazs = db.Zakazs.Where(f => f.Id.Equals(user.Id)).ToList();
-
+            //IList<Dish> selectedDish = db.Menus.SelectMany
             IList<List<Menu>> selectedMenus = new List<List<Menu>>();
-
+            //IList<List<Dish>> 
             foreach (Zakaz zakaz in zakazs)
             {
 
@@ -99,22 +118,7 @@ namespace KursachOliaMarina.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult LoginUserForm(string Email, string Password, bool Remember = false)
-        {
-            List<User> userList = db.Users.Where(a => a.Email.Equals(Email) && a.Password.Equals(Password)).ToList();
-            if (userList.Count == 1)
-            {
-                ViewBag.LoginFaultMessage = null;
-                User user = userList.First();
-                Session["user"] = user;
-                if (Remember)
-                    Session["remember"] = "remember";
-                return RedirectToAction("IndexUser", "Users");
-            }
-            ViewBag.LoginFaultMessage = "Не верная пара логин/пароль";
-            return View("LoginUser");
-        }
+       
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
