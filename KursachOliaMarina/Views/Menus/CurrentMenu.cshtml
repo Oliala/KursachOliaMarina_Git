@@ -1,0 +1,21 @@
+@model KursachOliaMarina.Models.CanteenContext
+@{
+    ViewBag.Title = "CreateZakaz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateZakaz</h2>
+
+<form align = "center">
+        @foreach (var d in ViewBag.SelectedDishes)
+            {
+            <option data-tokens="@d.Id" value="@d.Id">
+                <bold> </bold>@d.DishName
+                <bold> | </bold>@d.Price
+                <bold> | </bold>@d.Weight
+                
+            </option>
+                }
+</form>
+
+

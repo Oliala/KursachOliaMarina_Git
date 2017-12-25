@@ -90,15 +90,13 @@ namespace KursachOliaMarina.Controllers
         public void GetDataForUser()
         {
             User user = (User)Session["user"];
-            IEnumerable<Menu> currentmenus = db.Menus.OrderByDescending(f => f.Id).Take(1);
-            ViewBag.Menus = currentmenus;
+        //    IEnumerable<Menu> currentmenus = db.Menus.OrderByDescending(f => f.Id).Take(1);
+         //   ViewBag.Menus = currentmenus;
             ViewBag.IdUser = user.Id;
 
+            DateTime dayOfWeek = DateTime.Today;
 
-
-            int dayOfWeek = (int)DateTime.Today.DayOfWeek;
-
-            Menu menuForToday = db.Menus.Find(dayOfWeek);
+            Menu menuForToday = db.Menus.Where(f => f.DateOfMenu.Equals(dayOfWeek)).First();
 
             IList<Dish> selectedDishes = new List<Dish>();
 
@@ -111,7 +109,6 @@ namespace KursachOliaMarina.Controllers
 
             ViewBag.SelectedDishes = selectedDishes;
         }
-
 
 
 

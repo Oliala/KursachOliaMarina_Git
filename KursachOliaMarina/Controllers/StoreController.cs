@@ -18,15 +18,15 @@ namespace KursachOliaMarina.Controllers
             int adminId = Int32.Parse(request.Form.Get("AdminId"));
             //int hairStyleId = Int32.Parse(request.Form.Get("HairStyleId"));
             //int hairdresserId = Int32.Parse(request.Form.Get("HairdresserId"));
-            string date = request.Form.Get("DateOfMenu");
+            //string date = request.Form.Get("DateOfMenu");
             //string time = request.Form.Get("Time");
-            string[] dateParts = date.Split(new char[] { '-' });
+            //string[] dateParts = date.Split(new char[] { '-' });
             //string[] timeParts = time.Split(new char[] { '.' });
             Menu menu = new Menu
             {
                 AdminId = adminId,
-
-                DateOfMenu = new DateTime(Convert.ToInt32(dateParts[0]), Convert.ToInt32(dateParts[1]), Convert.ToInt32(dateParts[2]))
+                DateOfMenu = DateTime.Today
+                //DateOfMenu = new DateTime(Convert.ToInt32(dateParts[0]), Convert.ToInt32(dateParts[1]), Convert.ToInt32(dateParts[2]))
             };
             return menu;
         }
@@ -39,19 +39,20 @@ namespace KursachOliaMarina.Controllers
         {
             HttpRequestBase request = controllerContext.HttpContext.Request;
 
+            //DateTime dayOfWeek = DateTime.Today;
             int userId = Int32.Parse(request.Form.Get("userId"));
             //int hairStyleId = Int32.Parse(request.Form.Get("HairStyleId"));
             //int hairdresserId = Int32.Parse(request.Form.Get("HairdresserId"));
-            string date = request.Form.Get("DateOfZakaz");
+            //string date = request.Form.Get("DateOfZakaz");
             //string time = request.Form.Get("Time");
-            string[] dateParts = date.Split(new char[] { '-' });
+            //string[] dateParts = date.Split(new char[] { '-' });
             //string[] timeParts = time.Split(new char[] { '.' });
             Zakaz zakaz = new Zakaz
             {
                 UserId = userId,
-
-                DateOfZakaz = new DateTime(Convert.ToInt32(dateParts[0]), Convert.ToInt32(dateParts[1]), Convert.ToInt32(dateParts[2]))
-            };
+                //DateOfZakaz = dayOfWeek
+            DateOfZakaz = DateTime.Today
+        };
             return zakaz;
         }
 
@@ -107,7 +108,7 @@ namespace KursachOliaMarina.Controllers
             {
                 foreach (var c in db.Menus.Where(c => Menu_Ids.Contains(c.Id)))
                 {
-                    zakaz.Menus.Add(c);
+                        zakaz.Menus.Add(c);
                 }
             }
             db.Zakazs.Add(zakaz);

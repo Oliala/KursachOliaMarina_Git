@@ -24,16 +24,16 @@
                    
                 </ul>
                  <ul class="nav navbar-nav navbar-right">
-                 <div class="menu">
-                <ul>
-                    <li><a class="hide">Личный кабинет</a>
-                        <ul class="submenu">
+                    <li class="dropdown">
+                    <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Личный кабинет <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Мои заказы", "Index", "Users")</li>
                             <li>@Html.ActionLink("Информация", "Index", "Users")</li>
                         </ul>
                     </li>
+                    <li><a id = "text-menu" href="/Users/LogoutUser">Выход </a></li>
                 </ul>
-                <li><a id = "text-menu" href="/Users/LogoutUser">Выход </a></li>
+                
             </div> 
                 </ul>
 

@@ -37,6 +37,25 @@ namespace KursachOliaMarina.Controllers
             return View(menu);
         }
 
+        public ActionResult CurrentMenu()
+        {
+            DateTime dayOfWeek = DateTime.Today;
+
+            Menu menuForToday = db.Menus.Where(f => f.DateOfMenu.Equals(dayOfWeek)).First();
+
+            IList<Dish> selectedDishes = new List<Dish>();
+
+            foreach (Dish dish in menuForToday.Dishes)
+            {
+                selectedDishes.Add(dish);
+            }
+            
+            ViewBag.SelectedDishes = selectedDishes;
+        
+            return View();
+
+        }
+
         // GET: Menus/Create
         public ActionResult Create()
         {
@@ -44,9 +63,7 @@ namespace KursachOliaMarina.Controllers
             return View();
         }
 
-        // POST: Menus/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,DateOfMenu,AdminId")] Menu menu)
@@ -78,9 +95,7 @@ namespace KursachOliaMarina.Controllers
             return View(menu);
         }
 
-        // POST: Menus/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,DateOfMenu,AdminId")] Menu menu)

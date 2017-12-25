@@ -7,12 +7,12 @@
 
 <h2>Топ блюд</h2>
 
-<form>
+<form align = "center">
             @foreach (var s in ViewBag.Dishes)
             {
                 <option data-tokens="@s.DishName" value="@s.Id">
-                    <bold></bold>@s.DishName,
-                    <bold>Популярность </bold>@s.Popularity,
+                    <b>@s.DishName</b>
+                    <b>Популярность </b>@s.Popularity,
                 </option>
             }
         </select>
