@@ -6,9 +6,14 @@
 
 <h2>CreateZakaz</h2>
 
+ @if (@Session["error"] != null)
+        {
+            <h2>@Session["error"]</h2>
+        }
+
 <form class="" method="post" action="/Store/AddZakaz">
     <input type="hidden" name="UserId" value="@ViewBag.IdUser" />
-    <select multiple class="form-control" name="Menu_Ids" id="name">
+    <select multiple class="form-control" name="Dish_Ids" id="name">
         @foreach (var d in ViewBag.SelectedDishes)
             {
             <option data-tokens="@d.Id" value="@d.Id">

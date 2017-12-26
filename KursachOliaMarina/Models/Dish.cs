@@ -22,13 +22,14 @@ namespace KursachOliaMarina.Models
 
         public virtual ICollection<Ingredient> Ingredients { get; set; }
         public virtual ICollection<Menu> Menus { get; set; }
+        public virtual ICollection<Zakaz> Zakazs { get; set; }
 
         public Dish()
         {
             Ingredients = new List<Ingredient>();
             Menus = new List<Menu>();
+            Zakazs = new List<Zakaz>();
         }
-        
 
     }
 

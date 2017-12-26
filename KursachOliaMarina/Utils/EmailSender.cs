@@ -38,7 +38,7 @@ namespace KursachOliaMarina.Utils
         private string subject = null;
         private string body = null;
 
-        private string defaultSubject = "New haircut order from ";
+        private string defaultSubject = "У нас обновилось меню!";
         private string defaultBody;
 
         //public EmailSender(string to, string user, string orderDatetime)
@@ -119,13 +119,9 @@ namespace KursachOliaMarina.Utils
         {
             string body = "Здравствуйте! Проголодались?" +
                 "\n\n У нас обновилось меню, так что предлагаем посетить наш веб-сайт!" +
-                "\n Ждем Вас в нашей столовой!";
+                "\n Ждем Вас в нашей столовой!" +"\n" + DateOfMenu +":)";
             return body;
 
-            //string body = "Hello, it's a new order for haircut for you!" +
-            //    "\n\nThe client named " + user + " has left an order on " + orderDatetime + "." +
-            //    "\n To watch all your orders open your cabinet.";
-            //return body;
         }
     }
 }

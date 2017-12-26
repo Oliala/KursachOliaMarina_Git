@@ -38,6 +38,7 @@ namespace KursachOliaMarina.Controllers
         // GET: Dishes/Create
         public ActionResult Create()
         {
+            ViewBag.SelectedIngredients = db.Ingredients.ToList();
             return View();
         }
 
@@ -54,12 +55,18 @@ namespace KursachOliaMarina.Controllers
             newDish.Price = dish.Price;
             newDish.Weight = dish.Weight;
             newDish.Note = dish.Note;
-            newDish.Popularity = dish.Popularity;
+            newDish.Popularity = 0;
 
-            foreach (var c in db.Ingredients)
+            newDish.Ingredients.Clear();
+            if (ingredients != null)
+            {
+                //получаем выбранные курсы
+                foreach (var c in db.Ingredients.Where(co => ingredients.Contains(co.Id)))
                 {
                     newDish.Ingredients.Add(c);
                 }
+            }
+
 
             db.Dishes.Add(newDish);
             db.SaveChanges();
@@ -91,7 +98,7 @@ namespace KursachOliaMarina.Controllers
             newDish.Price = dish.Price;
             newDish.Weight = dish.Weight;
             newDish.Note = dish.Note;
-            newDish.Popularity = dish.Popularity;
+           // newDish.Popularity = dish.Popularity;
 
 
             newDish.Ingredients.Clear();

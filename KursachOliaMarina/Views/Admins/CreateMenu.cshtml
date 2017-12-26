@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "CreateMenu";
+            Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Menus</h2>
@@ -11,10 +12,8 @@
             @foreach (var s in ViewBag.Dishes)
             {
                 <option data-tokens="@s.DishName" value="@s.Id">
-                    <bold>Название: </bold>@s.DishName,
-                    <bold>Описание: </bold>@s.Weight,
-                    <bold>Стоимость: </bold>@s.Price,
-                    <bold>Стоимость: </bold>@s.Note
+                    <bold></bold>@s.DishName,
+                    <bold>Стоимость: </bold>@s.Price
                 </option>
             }
         </select>

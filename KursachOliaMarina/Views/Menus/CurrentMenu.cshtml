@@ -4,8 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CreateZakaz</h2>
-
+<h2>CurrentMenu</h2>
+<div>
 <form align = "center">
         @foreach (var d in ViewBag.SelectedDishes)
             {
@@ -16,6 +16,8 @@
                 
             </option>
                 }
+
+                <p><a class="btn btn-default" @Html.ActionLink("Create Order", "CreateZakaz", "Users")</a></p>
 </form>
 
-
+</div>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using KursachOliaMarina.Models;
 using KursachOliaMarina.Utils;
+using System.Diagnostics;
 
 namespace KursachOliaMarina.Controllers
 {
@@ -79,15 +80,15 @@ namespace KursachOliaMarina.Controllers
             db.SaveChanges();
             //Admin admin = db.Admins.Where(c => c.Id == menu.AdminId).ToList().First();
             //string adminName = admin.Login;
- //           var listuser = db.Users.Where(c => c.Email != null).ToList();
- //           foreach (User r in listuser)
- //           {
+           var listuser = db.Users.Where(c => c.Email != null).ToList();
+           foreach (User r in listuser)
+           {
 
                 //string email = user.Email.All;
-//                new EmailSender(r.Email,  menu.DateOfMenu.ToShortDateString() + " " + menu.DateOfMenu.ToShortTimeString()).send();
+                new EmailSender(r.Email,  menu.DateOfMenu.ToShortDateString() + " " + menu.DateOfMenu.ToShortTimeString()).send();
 
 
-//            }
+            }
             return RedirectToAction("Menus", "Admins");
         }
 
@@ -101,16 +102,76 @@ namespace KursachOliaMarina.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddZakaz([ModelBinder(typeof(ZakazBinder))] Zakaz zakaz, int[] Menu_Ids)
+        public ActionResult AddZakaz([ModelBinder(typeof(ZakazBinder))] Zakaz zakaz, int[] Dish_Ids)
         {
-            zakaz.Menus.Clear();
-            if (Menu_Ids != null)
+            zakaz.Dishes.Clear();
+            if (Dish_Ids != null)
             {
-                foreach (var c in db.Menus.Where(c => Menu_Ids.Contains(c.Id)))
+                foreach (var c in db.Dishes.Where(c => Dish_Ids.Contains(c.Id)))
                 {
-                        zakaz.Menus.Add(c);
+                    if (c.Note == "meat")
+                    {
+                        foreach (var t in zakaz.Dishes)
+                        {
+                            if (t.Note == "fish")
+                            {
+                                Debug.WriteLine("Нельзя совмещать в заказе блюда из рыбы и мяса");
+                                Session["error"] = "Нельзя совмещать в заказе блюда из рыбы и мяса";
+                                return RedirectToAction("CreateZakaz", "Users");
+                            }
+                        }
+                    }
+
+                    if (c.Note == "milk")
+                    {
+                        foreach (var t in zakaz.Dishes)
+                        {
+                            if (t.Note == "herring")
+                            {
+                                Session["error"] = "Нельзя совмещать в заказе молочные блюда и селедку";
+                                return RedirectToAction("CreateZakaz", "Users");
+                            }
+                        }
+                    }
+
+                    if (c.Note == "fish")
+                    {
+                        foreach (var t in zakaz.Dishes)
+                        {
+                            if (t.Note == "meat")
+                            {
+                                Debug.WriteLine("Нельзя совмещать в заказе блюда из рыбы и мяса");
+                                Session["error"] = "Нельзя совмещать в заказе блюда из рыбы и мяса";
+                                return RedirectToAction("CreateZakaz", "Users");
+                            }
+                        }
+                    }
+
+                    if (c.Note == "herring")
+                    {
+                        foreach (var t in zakaz.Dishes)
+                        {
+                            if (t.Note == "milk")
+                            {
+                                Session["error"] = "Нельзя совмещать в заказе молочные блюда и селедку";
+                                return RedirectToAction("CreateZakaz", "Users");
+                            }
+                        }
+                    }
+                    zakaz.Dishes.Add(c);
+                   
                 }
             }
+
+            foreach (var c in db.Dishes.Where(c => Dish_Ids.Contains(c.Id)))
+            {
+                c.Popularity++;
+            }
+
+            User user = db.Users.Find(zakaz.UserId);
+            user.Visit++;
+
+            Session["error"] = null;
             db.Zakazs.Add(zakaz);
             db.SaveChanges();
 

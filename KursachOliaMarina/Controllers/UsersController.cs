@@ -56,12 +56,12 @@ namespace KursachOliaMarina.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            if (Session["user"] == null)
+            if (Session["admin"] == null)
             {
-                return RedirectToAction("LoginUser", "Users");
+                return RedirectToAction("Login", "Admins");
             }
-            User user = (User)Session["user"];
-            // GetDataForUser();
+            Admin admin = (Admin)Session["admin"];
+           // MenuForUser();
             return View();
         }
 
@@ -84,7 +84,59 @@ namespace KursachOliaMarina.Controllers
             }
             ViewBag.LoginUser = ((User)Session["user"]).Email;
             GetDataForUser();
+            if (Session["error"] != null)
+            {
+
+            }
             return View();
+        }
+
+        //public ActionResult MyZakazs()
+        //{
+        //    User user = (User)Session["user"];
+        //    ViewBag.IdUser = user.Id;
+        //    IEnumerable<Dish> dishes = db.Dishes;
+        //    ViewBag.Dishes = dishes;
+        //    IList<Zakaz> zakazs = db.Zakazs.Where(f => f.UserId.Equals(user.Id)).ToList();
+        //    //IList<HairStyle> orderedHairstyles = new List<HairStyle>();
+        //    //IList<Hairdresser> orderedHairdressers = new List<Hairdresser>();
+        //    IList<List<Dish>> orderedDishes = new List<List<Dish>>();
+        //    List<double> orderCosts = new List<double>();
+        //    foreach (Zakaz zakaz in zakazs)
+        //    {
+                
+        //        orderedDishes.Add(zakaz.Dishes.ToList());
+        //        double allprice = db.Dishes.Where(s => s.Id == zakaz.DishId).ToList().First().Cost;
+        //        foreach (Service service in order.Services.ToList())
+        //        {
+        //            cost += service.Cost;
+        //        }
+        //        orderCosts.Add(cost);
+        //    }
+        //    ViewBag.OrderedHairstyles = orderedHairstyles;
+        //    ViewBag.OrderedHairdressers = orderedHairdressers;
+        //    ViewBag.Orders = orders;
+        //    ViewBag.OrderedServices = orderedServices;
+        //    ViewBag.CostOfOrders = orderCosts;
+        //}
+
+        public ActionResult MenuForUser()
+        {
+            DateTime dayOfWeek = DateTime.Today;
+
+            Menu menuForToday = db.Menus.Where(f => f.DateOfMenu.Equals(dayOfWeek)).First();
+
+            IList<Dish> selectedDishes = new List<Dish>();
+
+            foreach (Dish dish in menuForToday.Dishes)
+            {
+                selectedDishes.Add(dish);
+            }
+
+            ViewBag.SelectedDishes = selectedDishes;
+
+            return View();
+
         }
 
         public void GetDataForUser()

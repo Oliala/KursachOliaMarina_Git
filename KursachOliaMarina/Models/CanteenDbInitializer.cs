@@ -10,32 +10,35 @@ namespace KursachOliaMarina.Models
     {
         protected override void Seed(CanteenContext context)
         {
-            User user = new User
-            { Id = 1,
-                FName = "fdgg",
-                LName = "fdf",
-                Email = "user1",
-                Sex = "man",
+            User user1 = new User
+            {
+                Id = 1,
+                FName = "Olia",
+                LName = "Artukh",
+                Email = "oliala.oo@gmail.com",
+                Sex = "f",
                 Password = "user1",
-                Visit = 1
-                
-
+                Visit = 0
             };
-            context.Users.Add(user);
+            User user2 = new User
+            {
+                Id = 2,
+                FName = "Marina",
+                LName = "Yablonska",
+                Email = "mery1997@rambler.ru",
+                Sex = "f",
+                Password = "user2",
+                Visit = 0
+            };
+            context.Users.Add(user1);
+            context.Users.Add(user2);
             Admin adm1 = new Admin
             {
                 Id = 1,
                 Login = "admin1",
                 Password = "admin1"
             };
-            Admin adm2 = new Admin
-            {
-                Id = 1,
-                Login = "admin2",
-                Password = "admin2"
-            };
             context.Admins.Add(adm1);
-            context.Admins.Add(adm2);
             base.Seed(context);
         }
     }
