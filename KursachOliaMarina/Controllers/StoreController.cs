@@ -175,7 +175,7 @@ namespace KursachOliaMarina.Controllers
             db.Zakazs.Add(zakaz);
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Users");
+            return RedirectToAction("IndexUser", "Users");
         }
     }
 }

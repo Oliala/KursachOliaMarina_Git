@@ -1,7 +1,7 @@
 ﻿@model KursachOliaMarina.Models.CanteenContext
 @{
     ViewBag.Title = "CreateZakaz";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <h2>CreateZakaz</h2>
@@ -10,18 +10,25 @@
         {
             <h2>@Session["error"]</h2>
         }
-
-<form class="" method="post" action="/Store/AddZakaz">
-    <input type="hidden" name="UserId" value="@ViewBag.IdUser" />
-    <select multiple class="form-control" name="Dish_Ids" id="name">
-        @foreach (var d in ViewBag.SelectedDishes)
+<div>
+    
+    <form class="" method="post" action="/Store/AddZakaz">
+        <input type="hidden" name="UserId" value="@ViewBag.IdUser" />
+        <select multiple class="form-control" name="Dish_Ids" id="name">
+            @foreach (var d in ViewBag.SelectedDishes)
             {
-            <option data-tokens="@d.Id" value="@d.Id">
-                <bold>Название: </bold>@d.DishName
+                <option data-tokens="@d.Id" value="@d.Id">
+                    <bold>Название: </bold>@d.DishName
 
-            </option>
-        }
-    </select>
-   
-    <input type="submit" value="Добавить" id="button" />
-</form>
+                </option>
+            }
+        </select>
+        <p>
+            <img src="~/Content/est.jpg" alt="" width="400" height="400" align="right" />
+        </p>
+        <input type="submit" value="Добавить" id="button" />
+
+
+    </form>
+    
+</div>

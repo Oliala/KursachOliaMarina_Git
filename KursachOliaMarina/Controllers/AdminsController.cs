@@ -66,7 +66,7 @@ namespace KursachOliaMarina.Controllers
                 return RedirectToAction("Login");
             }
             ViewBag.LoginAdmin = ((Admin)Session["admin"]).Login;
-            return View(db);
+            return RedirectToAction("Index", "Users");
         }
         public ActionResult DeleteUser(int? id)
         {

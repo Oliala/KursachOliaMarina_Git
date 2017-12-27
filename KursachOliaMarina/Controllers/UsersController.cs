@@ -31,7 +31,7 @@ namespace KursachOliaMarina.Controllers
             {
                 User user = (User)Session["user"];
 
-                return RedirectToAction("Index", "Users");
+                
             }
             return View();
         }
@@ -47,7 +47,7 @@ namespace KursachOliaMarina.Controllers
                 Session["user"] = user;
                 if (Remember)
                     Session["remember"] = "remember";
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("IndexUser", "Users");
             }
             ViewBag.LoginFaultMessage = "Не верная пара логин/пароль";
             return View("LoginUser");
@@ -56,13 +56,18 @@ namespace KursachOliaMarina.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            if (Session["admin"] == null)
+            return View(db.Users.ToList());
+        }
+        [HttpGet]
+        public ActionResult IndexUser(int? id)
+        {
+            if (Session["user"] == null)
             {
-                return RedirectToAction("Login", "Admins");
+                return RedirectToAction("Login", "Users");
             }
-            Admin admin = (Admin)Session["admin"];
-           // MenuForUser();
-            return View();
+                User user = db.Users.Find(id);
+           
+            return View(user);
         }
 
         [HttpGet]
