@@ -118,8 +118,8 @@ namespace KursachOliaMarina.Utils
         private static string createDefaultBody( string DateOfMenu)
         {
             string body = "Здравствуйте! Проголодались?" +
-                "\n\n У нас обновилось меню, так что предлагаем посетить наш веб-сайт!" +
-                "\n Ждем Вас в нашей столовой!" +"\n" + DateOfMenu +":)";
+                "\n\n У нас обновилось меню на  "+ DateOfMenu +" так что предлагаем посетить наш веб-сайт!" +
+                "\n Ждем Вас в нашей столовой! :)";
             return body;
 
         }

@@ -1,42 +1,31 @@
-﻿@model KursachOliaMarina.Models.Zakaz
+﻿@using KursachOliaMarina.Models
+
+@model KursachOliaMarina.Models.Zakaz
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <h2>Details</h2>
+<fieldset>
+    <legend>Информация о блюде</legend>
 
-<div>
-    <h4>Zakaz</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ZakazName)
-        </dt>
+    
 
-        <dd>
-            @Html.DisplayFor(model => model.ZakazName)
-        </dd>
+    <div class="display-label"><b>Дата заказа</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateOfZakaz)
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateOfZakaz)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateOfZakaz)
-        </dd>
+    <div class="display-label"><b>Блюда в заказе: </b></div>
+    <ul>
+        @foreach (Dish c in Model.Dishes)
+        {
+            <li>@c.DishName</li>
+        }
+    </ul>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
+</fieldset>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
