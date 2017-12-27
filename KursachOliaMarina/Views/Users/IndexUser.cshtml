@@ -5,9 +5,21 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<h2>IndexUser</h2>
-@Html.ActionLink("Сделать заказ", "CreateZakaz" ) 
+<h2>Приветствуем Вас, Пользователь!</h2>
+
 <p>
-    <img src="~/Content/ruki.jpg" alt="" width="400" height="400" align="right" />
+    <a class="btn btn-default" @Html.ActionLink("Сделать заказ", "CreateZakaz")</a>
+</p>
+<div class="form-group">
+    <p>
+        <img src="~/Content/title.jpg" alt="" width="1150" align="top" />
+    </p>
+<p>
+    <img src="~/Content/drink.jpg" alt="" width="500" height="450" align="left" />
 </p>
 
+<p>
+    <img src="~/Content/ruki.jpg" alt="" width="500" height="450" align="right" />
+</p>
+
+</div>
